@@ -10,6 +10,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.Serializable;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Redis单元测试类
@@ -28,7 +29,7 @@ public class RedisWorldApplicationTest {
 
     @Test
     public void testRedisString(){
-        stringRedisTemplate.opsForValue().set("testKey", "redis");
+        stringRedisTemplate.opsForValue().set("testKey", "redis", 20, TimeUnit.SECONDS);
         System.out.println("get value :" + stringRedisTemplate.opsForValue().get("testKey"));
     }
 
