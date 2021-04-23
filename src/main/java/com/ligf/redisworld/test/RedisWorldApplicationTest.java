@@ -10,6 +10,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -29,7 +31,7 @@ public class RedisWorldApplicationTest {
 
     @Test
     public void testRedisString(){
-        stringRedisTemplate.opsForValue().set("testKey", "redis", 20, TimeUnit.SECONDS);
+        stringRedisTemplate.opsForValue().set("testKey", "redis");
         System.out.println("get value :" + stringRedisTemplate.opsForValue().get("testKey"));
     }
 
@@ -41,6 +43,21 @@ public class RedisWorldApplicationTest {
         sysUser.setPassword("123456");
         serializableRedisTemplate.opsForValue().set("testObject", sysUser);
         System.out.println("get object:" + serializableRedisTemplate.opsForValue().get("testObject"));
+
+        SysUser sysUser1 = new SysUser();
+        sysUser.setUid(123);
+        sysUser.setUserName("Garment1");
+        sysUser.setPassword("123456");
+
+        SysUser sysUser2 = new SysUser();
+        sysUser.setUid(123);
+        sysUser.setUserName("Garment2");
+        sysUser.setPassword("123456");
+
+        List<SysUser> list = new ArrayList();
+        list.add(sysUser1);
+        list.add(sysUser2);
+//        serializableRedisTemplate.opsForValue().set("sysList:", list);
     }
 
 }
